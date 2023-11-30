@@ -1,0 +1,6 @@
+package com.deltarfd.deltafood.deltafood
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
