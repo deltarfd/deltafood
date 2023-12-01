@@ -39,38 +39,43 @@ class _SearchViewState extends State<SearchView> {
       appBar: AppBar(
         title: const Text('Search'),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(8.0)
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: TextField(
-                  controller: _searchController,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: const InputDecoration(
-                    hintText: 'Search...',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    suffixStyle: TextStyle(color: Colors.black),
-                    prefixIcon: Icon(Icons.search),
-                    border: InputBorder.none,
+      resizeToAvoidBottomInset: false, // Avoid resizing when the keyboard appears
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Flexible(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: TextField(
+                      controller: _searchController,
+                      style: const TextStyle(color: Colors.black),
+                      decoration: const InputDecoration(
+                        hintText: 'Search...',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        suffixStyle: TextStyle(color: Colors.black),
+                        prefixIcon: Icon(Icons.search),
+                        border: InputBorder.none,
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: StreamBuilder<List<Restaurant>>(
+            StreamBuilder<List<Restaurant>>(
               stream: _searchBloc.searchResults,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final searchResults = snapshot.data!;
                   return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: searchResults.length,
                     itemBuilder: (context, index) {
                       final restaurant = searchResults[index];
@@ -82,8 +87,8 @@ class _SearchViewState extends State<SearchView> {
                 }
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
