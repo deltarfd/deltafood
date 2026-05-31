@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:deltafood/presentation/ui/profile_view.dart';
-import 'package:deltafood/presentation/ui/search_view.dart';
-import 'package:deltafood/presentation/ui/restaurants_view.dart';
+import 'package:deltafood/ui/features/profile/views/profile_view.dart';
+import 'package:deltafood/ui/features/search/views/search_view.dart';
+import 'package:deltafood/ui/features/restaurants/views/restaurants_view.dart';
 import 'injection/di.dart';
 
 
@@ -18,11 +18,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        textTheme: GoogleFonts.poppinsTextTheme().apply(
-          bodyColor: Colors.grey[300], // Set text color for the entire app
+      title: 'DeltaFood',
+      themeMode: ThemeMode.system,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepOrange,
+          brightness: Brightness.light,
         ),
-      ), // Switch to dark theme
+        textTheme: GoogleFonts.poppinsTextTheme(ThemeData.light().textTheme),
+        useMaterial3: true,
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepOrange,
+          brightness: Brightness.dark,
+        ),
+        textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+        useMaterial3: true,
+      ),
       home: const RestaurantApp(),
     );
   }

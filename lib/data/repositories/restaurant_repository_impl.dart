@@ -1,7 +1,7 @@
-import 'package:deltafood/core/entities/review.dart';
-import 'package:deltafood/core/entities/restaurant.dart';
+import 'package:deltafood/domain/models/review.dart';
+import 'package:deltafood/domain/models/restaurant.dart';
 import 'package:deltafood/domain/repositories/restaurant_repository.dart';
-import 'package:deltafood/data/datasources/remote_datasource.dart';
+import 'package:deltafood/data/services/remote_datasource.dart';
 
 class RestaurantRepositoryImpl implements RestaurantRepository {
   final RemoteDataSource remoteDataSource;
